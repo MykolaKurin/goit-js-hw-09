@@ -62,9 +62,9 @@ startButton.addEventListener('click', () => {
 
 function updateClockface({ days, hours, minutes, seconds }) {
    daysNode.textContent = `${days}`;
-    hoursNode.textContent = `${hours}`;
-    minutesNode.textContent = `${minutes}`;
-    secondsNode.textContent = `${seconds}`;
+   hoursNode.textContent = `${hours}`;
+   minutesNode.textContent = `${minutes}`;
+   secondsNode.textContent = `${seconds}`;
 }
 
 function addLeadingZero(value) {
@@ -87,7 +87,7 @@ function convertMs(ms) {
   // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  return { days, hours, minutes, seconds };
+    return { days, hours, minutes, seconds };
 }
 
 // console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
