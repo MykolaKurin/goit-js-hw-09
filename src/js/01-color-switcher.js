@@ -3,7 +3,6 @@ console.log(btnStart)
 const btnStop = document.querySelector('button[data-stop]')
 console.log(btnStop)
 
-
 btnStart.addEventListener('click', onStartClick)
 btnStop.addEventListener('click', onStopClick);
 
