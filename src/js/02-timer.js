@@ -5,8 +5,8 @@ require("flatpickr/dist/themes/dark.css");
 import Notiflix from 'notiflix';
 
 const startButton = document.querySelector('[data-start]');
-const inputNode = document.querySelector('#datetime-picker');
-const timerNode = document.querySelector('.timer');
+// const inputNode = document.querySelector('#datetime-picker');
+// const timerNode = document.querySelector('.timer');
 const daysNode = document.querySelector('[data-days]');
 const hoursNode = document.querySelector('[data-hours]');
 const minutesNode = document.querySelector('[data-minutes]');
@@ -56,9 +56,7 @@ const timer = {
     },
 };
 
-startButton.addEventListener('click', () => {
-    timer.start();
-})
+startButton.addEventListener('click', () => timer.start())
 
 function updateClockface({ days, hours, minutes, seconds }) {
    daysNode.textContent = `${days}`;
@@ -67,9 +65,9 @@ function updateClockface({ days, hours, minutes, seconds }) {
    secondsNode.textContent = `${seconds}`;
 }
 
-function addLeadingZero(value) {
-    return String(value).padStart(2,'0');
-}
+// function addLeadingZero(value) {
+//     return String(value).padStart(2,'0');
+// }
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
