@@ -1,39 +1,39 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import Notiflix from 'notiflix';
 
-const refs = {
-  form: document.querySelector('form'),
-};
+const form = document.querySelector(".form");
+form.addEventListener("submit", onFormData);
 
-const createPromise = (position, delay) =>
-  new Promise((resolve, reject) =>
-    setTimeout(() => {
-      const shouldResolve = Math.random() > 0.3;
-      if (shouldResolve) {
-        resolve({ position, delay });
-      } else {
-        reject({ position, delay });
-      }
-    }, delay),
-  );
+function createPromise(position, delay) {
+    const shouldResolve = Math.random() > 0.3;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => { 
+        if (shouldResolve) {
+          resolve({position, delay});
+        } else {
+          reject({position, delay});
+        }
+      }, delay)
+  })
+  }
 
-const onSubmit = e => {
-  e.preventDefault();
-
-  const data = {};
-
-  [...e.target.elements]
-    .filter(elem => elem.tagName === 'INPUT')
-    .forEach(elem => (data[elem.name] = parseInt(elem.value)));
-
-  for (let i = 1; i <= data.amount; i += 1) {
-    createPromise(i, data.delay + i * data.step)
+function onFormData(event) {
+  event.preventDefault()
+  const {
+    elements: { delay, step, amount}
+  } = event.currentTarget;
+  let firstDelay = Number(delay.value);
+  let delayStep = Number(step.value);
+  let currentAmount = Number(amount.value);
+  for (let i = 1; i <= currentAmount; i += 1) {
+      createPromise(i, firstDelay)
       .then(({ position, delay }) => {
-        Notify.success(`Resolved promise ${position} in ${delay}ms`);
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
-        Notify.failure(`Rejected promise ${position} in ${delay}ms`);
-      });
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      })
+      firstDelay += delayStep;
   }
-};
+}
 
 refs.form.addEventListener('submit', onSubmit);
